@@ -39,30 +39,31 @@ def get_chatbot_response(message, uploaded_file):
     return response.choices[0].message.content
 
 def run():
-    st.set_page_config(page_title="Chatbot Auscult.AI", page_icon="🤖")
+    st.set_page_config(page_title="Auscult.AI 🤖", page_icon="🤖")
     st.sidebar.image("https://github.com/arthurleardini/arthurleardini-auscult-ai/blob/main/Auscult.AI.png?raw=true", use_column_width=True)
-    st.title("Chatbot Auscult.AI")
-
-    st.write("Bem-vindo ao nosso chatbot de diagnóstico. Por favor, carregue o áudio da auscultação para começar.")
-
+    st.header(":green[Experimente a nossa tecnologia de estratificação de risco de doenças pulmonares]")
+    st.image("https://raw.githubusercontent.com/arthurleardini/arthurleardini-auscult-ai/main/chatbot.png", use_column_width=True)
     # Armazenamento de estado para manter histórico de chat
-    if 'history' not in st.session_state:
-        st.session_state['history'] = []
-
-    # Upload de arquivo de áudio
-    uploaded_file = st.file_uploader("Carregue o arquivo de áudio da auscultação", type=["wav", "mp3"])
-
+    if 'messages' not in st.session_state:
+        st.session_state['messages'] = []
+    
     # Área para mensagens do chatbot
-    user_message = st.text_input("Digite sua mensagem para o chatbot", key="user_input")
+    user_message = st.chat_input("Digite sua mensagem para o chatbot", key="user_input")
+    
+    # Upload de arquivo de áudio
+    uploaded_file = st.file_uploader("",type=["wav", "mp3"])
 
-    if st.button("Enviar"):
+
+
+    if user_message:
         response = get_chatbot_response(user_message, uploaded_file)
-        st.session_state['history'].append(f"Você: {user_message}")
-        st.session_state['history'].append(f"Chatbot: {response}")
+        st.session_state['messages'].append({"role": "user", "content": user_message})
+        st.session_state['messages'].append({"role": "assistant", "content": response})
 
-    # Exibir histórico do chat
-    for message in st.session_state['history']:
-        st.text(message)
+    # Exibir mensagens do histórico de chat
+    for message in st.session_state['messages']:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
 if __name__ == "__main__":
     run()
