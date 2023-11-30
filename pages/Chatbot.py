@@ -40,7 +40,7 @@ def get_chatbot_response(message, uploaded_file):
 
 def run():
     st.set_page_config(page_title="Chatbot Auscult.AI", page_icon="🤖")
-
+    st.sidebar.image("https://github.com/arthurleardini/arthurleardini-auscult-ai/blob/main/Auscult.AI.png?raw=true", use_column_width=True)
     st.title("Chatbot Auscult.AI")
 
     st.write("Bem-vindo ao nosso chatbot de diagnóstico. Por favor, carregue o áudio da auscultação para começar.")
