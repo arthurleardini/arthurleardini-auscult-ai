@@ -4,14 +4,14 @@ from streamlit.logger import get_logger
 LOGGER = get_logger(__name__)
 
 def run():
-    st.sidebar.image("https://github.com/arthurleardini/arthurleardini-auscult-ai/blob/main/Auscult.AI.png?raw=true", use_column_width=True)
+   
     st.set_page_config(
         page_title="Auscult.AI",
         page_icon="🩺",
     )
 
     st.write("# Transformando a saúde respiratória brasileira um diagnóstico de cada vez!")
-
+    st.sidebar.image("https://github.com/arthurleardini/arthurleardini-auscult-ai/blob/main/Auscult.AI.png?raw=true", use_column_width=True)
     st.markdown(
         """
         <style>
